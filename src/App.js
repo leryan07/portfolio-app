@@ -1,6 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-// import './App.css';
+import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,20 +16,24 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
+  hrStyle: {
+    borderColor: '#F8AF8F'
+  },
   appBarTitle: {
     flexGrow: 1
-  },
-  roleTitle: {
-    paddingTop: '20px',
-    paddingBottom: '20px'
   },
   bioCardRoot: {
     width: 'fit-content',
     minWidth: 'fit-content',
-    margin: 'auto'
+    margin: 'auto',
+    backgroundColor: '#162039',
+    color: '#DF4277'
+  },
+  bioListItemIcon: {
+    color: '#F8AF8F'
   },
   mainContainer: {
-    paddingTop: '10px',
+    marginTop: '40px',
     margin: 'auto',
     width: '50%',
     justifyContent: 'space-between'
@@ -39,6 +43,14 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     bottom: 0,
     width: '100%'
+  },
+  appBar: {
+    backgroundColor: '#162039',
+    color: '#F8AF8F'
+  },
+  appBarIcon: {
+    color: '#F8AF8F',
+    cursor: '#FFFFFF'
   }
 }));
 
@@ -47,32 +59,29 @@ function App() {
 
   return (
     <div>
-      <AppBar color='default' position='static'>
+      <AppBar position='static' className={classes.appBar}>
         <Toolbar>
           <Typography variant='h6' className={classes.appBarTitle}>
             Ryan Le
           </Typography>
           <IconButton href='https://www.linkedin.com/in/leryan07/' target='_blank'>
-            <LinkedIn />
+            <LinkedIn className={classes.appBarIcon} />
           </IconButton>
           <IconButton href='https://github.com/leryan07' target='_blank'>
-            <GitHub />
+            <GitHub className={classes.appBarIcon} />
           </IconButton>
         </Toolbar>
       </AppBar>
       <Container className={classes.mainContainer}>
-        <Typography variant='h3' align='center' className={classes.roleTitle}>
-          Software Developer
-        </Typography>
         <Card raised={true} className={classes.bioCardRoot}>
           <CardContent>
-            <Typography style={{ paddingLeft: '16px' }}>
-              Bio
+            <Typography variant='h5' align='center'>
+              Software Developer
             </Typography>
-            <hr />
+            <hr className={classes.hrStyle} />
             <List>
                 <ListItem>
-                  <ListItemIcon>
+                  <ListItemIcon className={classes.bioListItemIcon}>
                     <LocationOn />
                   </ListItemIcon>
                   <ListItemText>
@@ -80,7 +89,7 @@ function App() {
                   </ListItemText>
                 </ListItem>
                 <ListItem>
-                  <ListItemIcon>
+                  <ListItemIcon className={classes.bioListItemIcon}>
                     <School />
                   </ListItemIcon>
                   <ListItemText>
