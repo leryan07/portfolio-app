@@ -11,11 +11,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
     bioCardRoot: {
-        width: 'fit-content',
-        minWidth: 'fit-content',
-        margin: 'auto',
         backgroundColor: '#162039',
-        color: '#DF4277'
+        color: '#DF4277',
+        width: '20em'
     },
     bioListItemIcon: {
         color: '#F8AF8F'
@@ -37,20 +35,20 @@ const BioCard = (props) => {
                 <hr className={classes.hrStyle} />
                 <List>
                     <ListItem>
-                    <ListItemIcon className={classes.bioListItemIcon}>
-                        <LocationOn />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Austin, TX
-                    </ListItemText>
+                        <ListItemIcon className={classes.bioListItemIcon}>
+                            <LocationOn />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Austin, TX
+                        </ListItemText>
                     </ListItem>
                     <ListItem>
-                    <ListItemIcon className={classes.bioListItemIcon}>
-                        <School />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Florida Atlantic University
-                    </ListItemText>
+                        <ListItemIcon className={classes.bioListItemIcon}>
+                            <School />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Florida Atlantic University
+                        </ListItemText>
                     </ListItem>
                 </List>
             </CardContent>
