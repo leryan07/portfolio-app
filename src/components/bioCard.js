@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { LocationOn, School } from '@material-ui/icons';
@@ -23,14 +24,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BioCard = (props) => {
+const BioCard = ({ t }) => {
     const classes = useStyles();
 
     return (
         <Card raised={true} className={classes.bioCardRoot}>
             <CardContent>
                 <Typography variant='h5' align='center'>
-                Software Developer
+                    {t('jobTitle')}
                 </Typography>
                 <hr className={classes.hrStyle} />
                 <List>
@@ -39,7 +40,7 @@ const BioCard = (props) => {
                             <LocationOn />
                         </ListItemIcon>
                         <ListItemText>
-                            Austin, TX
+                            {t('location')}
                         </ListItemText>
                     </ListItem>
                     <ListItem>
@@ -47,7 +48,7 @@ const BioCard = (props) => {
                             <School />
                         </ListItemIcon>
                         <ListItemText>
-                            Florida Atlantic University
+                            {t('school')}
                         </ListItemText>
                     </ListItem>
                 </List>
@@ -56,4 +57,4 @@ const BioCard = (props) => {
     );
 };
 
-export default BioCard;
+export default withTranslation()(BioCard);

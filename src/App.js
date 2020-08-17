@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import 'typeface-roboto';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,15 +18,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
+  const { t } = useTranslation();
   const classes = useStyles();
 
   return (
       <Grid container alignItems='center' justify='center' className={classes.root}>
         <Grid item xs={12}>
-          <NavigationBar />
+          <NavigationBar t={t} />
         </Grid>
         <Grid item className={classes.bioGrid}>
-          <BioCard />          
+          <BioCard t={t} />          
         </Grid>
       </Grid>
   );

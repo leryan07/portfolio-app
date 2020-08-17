@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,24 +21,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const NavigationBar = (props) => {
+const NavigationBar = ({ t }) => {
     const classes = useStyles();
 
     return (
         <AppBar position='static' className={classes.appBar}>
             <Toolbar>
-            <Typography variant='h6' className={classes.appBarTitle}>
-                Ryan Le
-            </Typography>
-            <IconButton href='https://www.linkedin.com/in/leryan07/' target='_blank'>
-                <LinkedIn className={classes.appBarIcon} />
-            </IconButton>
-            <IconButton href='https://github.com/leryan07' target='_blank'>
-                <GitHub className={classes.appBarIcon} />
-            </IconButton>
+                <Typography variant='h6' className={classes.appBarTitle}>
+                    {t('name')}
+                </Typography>
+                <IconButton href='https://www.linkedin.com/in/leryan07/' target='_blank'>
+                    <LinkedIn className={classes.appBarIcon} />
+                </IconButton>
+                <IconButton href='https://github.com/leryan07' target='_blank'>
+                    <GitHub className={classes.appBarIcon} />
+                </IconButton>
             </Toolbar>
         </AppBar>
     );
 };
 
-export default NavigationBar;
+export default withTranslation()(NavigationBar);
