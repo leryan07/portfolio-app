@@ -12,11 +12,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
     bioCardRoot: {
-        width: 'fit-content',
-        minWidth: 'fit-content',
-        margin: 'auto',
         backgroundColor: '#162039',
-        color: '#DF4277'
+        color: '#DF4277',
+        width: '20em'
     },
     bioListItemIcon: {
         color: '#F8AF8F'

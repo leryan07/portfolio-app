@@ -6,13 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import NavigationBar from './components/navigationBar';
 import BioCard from './components/bioCard';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
-  mainContainer: {
-    marginTop: '40px',
-    margin: 'auto',
-    width: '50%',
-    justifyContent: 'space-between'
+  root: {
+    flexGrow: 1
+  },
+  bioGrid: {
+    marginTop: '2em'
   }
 }));
 
@@ -21,12 +22,14 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div>
-      <NavigationBar t={t} />
-      <Container className={classes.mainContainer}>
-        <BioCard t={t} />
-      </Container>
-    </div>
+      <Grid container alignItems='center' justify='center' className={classes.root}>
+        <Grid item xs={12}>
+          <NavigationBar t={t} />
+        </Grid>
+        <Grid item className={classes.bioGrid}>
+          <BioCard t={t} />          
+        </Grid>
+      </Grid>
   );
 }
 
