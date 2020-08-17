@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { LocationOn, School } from '@material-ui/icons';
@@ -25,32 +26,32 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BioCard = (props) => {
+const BioCard = ({ t }) => {
     const classes = useStyles();
 
     return (
         <Card raised={true} className={classes.bioCardRoot}>
             <CardContent>
                 <Typography variant='h5' align='center'>
-                Software Developer
+                    {t('jobTitle')}
                 </Typography>
                 <hr className={classes.hrStyle} />
                 <List>
                     <ListItem>
-                    <ListItemIcon className={classes.bioListItemIcon}>
-                        <LocationOn />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Austin, TX
-                    </ListItemText>
+                        <ListItemIcon className={classes.bioListItemIcon}>
+                            <LocationOn />
+                        </ListItemIcon>
+                        <ListItemText>
+                            {t('location')}
+                        </ListItemText>
                     </ListItem>
                     <ListItem>
-                    <ListItemIcon className={classes.bioListItemIcon}>
-                        <School />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Florida Atlantic University
-                    </ListItemText>
+                        <ListItemIcon className={classes.bioListItemIcon}>
+                            <School />
+                        </ListItemIcon>
+                        <ListItemText>
+                            {t('school')}
+                        </ListItemText>
                     </ListItem>
                 </List>
             </CardContent>
@@ -58,4 +59,4 @@ const BioCard = (props) => {
     );
 };
 
-export default BioCard;
+export default withTranslation()(BioCard);

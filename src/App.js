@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import 'typeface-roboto';
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,13 +17,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
+  const { t } = useTranslation();
   const classes = useStyles();
 
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar t={t} />
       <Container className={classes.mainContainer}>
-        <BioCard />
+        <BioCard t={t} />
       </Container>
     </div>
   );
