@@ -1,16 +1,16 @@
-import React from 'react';
 import { withTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { LocationOn, School } from '@material-ui/icons';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { LocationOn, School } from '@mui/icons-material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import PropTypes from 'prop-types';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(() => ({
     bioCardRoot: {
         backgroundColor: '#162039',
         color: '#DF4277',
@@ -55,6 +55,10 @@ const BioCard = ({ t }) => {
             </CardContent>
         </Card>
     );
+};
+
+BioCard.propTypes = {
+    t: PropTypes.func.isRequired
 };
 
 export default withTranslation()(BioCard);
