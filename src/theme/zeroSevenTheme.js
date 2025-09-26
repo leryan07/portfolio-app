@@ -1,8 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
-const zeroSevenTheme = createTheme({
+const zeroSevenLightTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
       main: '#FFA500',
     },
@@ -10,7 +10,7 @@ const zeroSevenTheme = createTheme({
       main: '#5D3FD3',
     },
     background: {
-      default: '#121212',
+      default: '#FFFFFF',
     }
   },
   components: {
@@ -22,4 +22,26 @@ const zeroSevenTheme = createTheme({
   },
 });
 
-export default zeroSevenTheme;
+const zeroSevenDarkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#FFA500',
+    },
+    secondary: {
+      main: '#5D3FD3',
+    },
+    background: {
+      default: '#7d7d7d',
+    }
+  },
+  components: {
+    MuiAppBar: {
+      defaultProps: {
+        color: 'default',
+      },
+    },
+  },
+});
+
+export { zeroSevenLightTheme, zeroSevenDarkTheme };
