@@ -36,5 +36,13 @@ html {
     justify-content: center;
     margin: 0;
     padding: 0;
+}
+
+.section-intro {
+    background: linear-gradient(135deg, #FFA500 0%, #FFFFFF 25%, #FFFFFF 50%, #FFFFFF 75%, #5D3FD3 100%);
     margin-top: 64px;
+}
+
+.section-about {
+    color: "#000000"
 }
