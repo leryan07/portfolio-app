@@ -2,7 +2,7 @@ import { default as Grid, default as Item } from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import 'typeface-roboto';
-import './App.css';
+import './styles/app.css';
 import NavigationBar from './components/navigationBar';
 import Intro from './components/intro';
 import AboutMe from './components/aboutMe';

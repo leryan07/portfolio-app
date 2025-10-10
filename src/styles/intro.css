@@ -1,9 +1,3 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-}
-
 .slide-init-left {
     opacity: 0;
     transform: translateX(-100vw);
@@ -26,23 +20,4 @@ html {
     opacity: 1;
     transform: translateX(0);
     transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.section-common {
-    min-height: calc(100vh - 64px);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-}
-
-.section-intro {
-    background: linear-gradient(135deg, #FFA500 0%, #FFFFFF 25%, #FFFFFF 50%, #FFFFFF 75%, #5D3FD3 100%);
-    margin-top: 64px;
-}
-
-.section-about {
-    color: "#000000"
 }

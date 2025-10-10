@@ -1,12 +1,16 @@
 import { withTranslation } from "react-i18next"
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { default as Grid, default as Item } from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import '../styles/intro.css';
+
+const introTypographyStyle = (theme, color) => ({
+    fontSize: { xs: '3rem', md: '6vw', lg: '8vw' },
+    color: color ?? theme.palette.primary.main
+});
 
 const Intro = ({ t }) => {
-    const theme = useTheme();
     const [showFirst, setShowFirst] = useState(false);
     const [showSecond, setShowSecond] = useState(false);
 
@@ -27,7 +31,7 @@ const Intro = ({ t }) => {
                     <Typography
                         variant="h1"
                         className={showFirst ? 'slide-in-left' : 'slide-init-left'}
-                        sx={{ fontSize: { xs: '3rem', md: '8vw', lg: '10vw', color: theme.palette.primary.main } }}
+                        sx={(theme) => introTypographyStyle(theme)}
                     >
                         {t('name').split(' ')[0]}
                     </Typography>
@@ -40,7 +44,7 @@ const Intro = ({ t }) => {
                     <Typography
                         variant="h1"
                         className={showSecond ? 'slide-in-right' : 'slide-init-right'}
-                        sx={{ fontSize: { xs: '3rem', md: '8vw', lg: '10vw', color: theme.palette.secondary.main } }}
+                        sx={(theme) => introTypographyStyle(theme, theme.palette.secondary.main)}
                     >
                         {t('name').split(' ')[1]}
                     </Typography>

@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material/styles';
 
 const zeroSevenLightTheme = createTheme({
+  typography: {
+    fontFamily: 'Orbitron, Arial, sans-serif',
+  },
   palette: {
     mode: 'light',
     primary: {
@@ -23,6 +26,9 @@ const zeroSevenLightTheme = createTheme({
 });
 
 const zeroSevenDarkTheme = createTheme({
+  typography: {
+    fontFamily: 'Orbitron, Arial, sans-serif',
+  },
   palette: {
     mode: 'dark',
     primary: {

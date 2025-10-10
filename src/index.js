@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './app';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
 import { zeroSevenLightTheme, zeroSevenDarkTheme } from './theme/zeroSevenTheme.js';
