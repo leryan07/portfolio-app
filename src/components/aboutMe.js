@@ -48,7 +48,7 @@ const AboutMe = ({ t }) => {
                                     <Timer />
                                 </AboutMeListIcon>
                                 <AboutMeListItemText>
-                                    {t('yearsOfExperience', { count: getYearsOfExperience })}
+                                    {t('yearsOfExperience', { count: getYearsOfExperience() })}
                                 </AboutMeListItemText>
                             </ListItem>
                         </List>

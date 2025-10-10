@@ -2,17 +2,16 @@ import { createRoot } from 'react-dom/client';
 import App from './app';
 import * as serviceWorker from './serviceWorker';
 import './i18n';
-import { zeroSevenLightTheme, zeroSevenDarkTheme } from './theme/zeroSevenTheme.js';
-import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { ThemeProviderWithToggle } from './components/themeContext';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-    <ThemeProvider theme={zeroSevenLightTheme}>
+    <ThemeProviderWithToggle>
         <CssBaseline />
         <App />
-    </ThemeProvider>
+    </ThemeProviderWithToggle>
 );
 
 serviceWorker.unregister();

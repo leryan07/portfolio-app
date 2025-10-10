@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import React from 'react';
+import ThemeSwitch from './themeSwitch';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
     color: theme.palette.secondary.main,
@@ -40,6 +41,7 @@ const NavigationBar = ({ t }) => {
                         <StyledIconButton href='https://github.com/leryan07' target='_blank' size='large'>
                             <GitHub fontSize='inherit' />
                         </StyledIconButton>
+                        <ThemeSwitch />
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
