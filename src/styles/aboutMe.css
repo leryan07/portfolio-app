@@ -1,15 +1,3 @@
-.about-me-list {
-    margin-top: 48px;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid #0000;
-    border-radius: 12px;
-    background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(var(--angle),
-            #FFA500,
-            #5D3FD3) border-box;
-    animation: 8s rotate linear infinite;
-}
-
 @keyframes rotate {
     to {
         --angle: 360deg;

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import '../styles/intro.css';
 
 const introTypographyStyle = (theme, color) => ({
-    fontSize: { xs: '3rem', md: '6vw', lg: '8vw' },
+    fontSize: { xs: '3rem', md: '6vw' },
     color: color ?? theme.palette.primary.main
 });
 

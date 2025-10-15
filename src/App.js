@@ -7,18 +7,26 @@ import NavigationBar from './components/navigationBar';
 import Intro from './components/intro';
 import AboutMe from './components/aboutMe';
 
-const useStyles = styled(() => ({
-  root: {
-    flexGrow: 1
-  },
-  bioGrid: {
-    marginTop: '2em'
-  }
+const SectionCommon = styled('section')(({ theme, variant }) => ({
+  minHeight: '100vh',
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  margin: 0,
+  padding: 0,
+  ...(variant === 'intro' && {
+    minHeight: 'calc(100vh - 64px)',
+    marginTop: '64px',
+    backgroundImage: theme.custom.gradients.sectionIntro,
+  }),
+  ...(variant === 'aboutMe' && {
+    backgroundImage: theme.custom.gradients.sectionAboutMe,
+  })
 }));
 
 function App() {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   return (
     <Grid
@@ -27,19 +35,18 @@ function App() {
         justifyContent: 'center',
         alignItems: 'center',
       }}
-      className={classes.root}
     >
       <Grid size={{ xs: 12 }}>
         <Item>
           <NavigationBar t={t} />
         </Item>
       </Grid>
-      <section id="introduction" className="section-common section-intro">
+      <SectionCommon id="introduction" variant="intro">
         <Intro t={t} />
-      </section>
-      <section id='about-me' className='section-common section-about'>
+      </SectionCommon>
+      <SectionCommon id='about-me' variant='aboutMe'>
         <AboutMe t={t} />
-      </section>
+      </SectionCommon>
     </Grid >
   );
 }

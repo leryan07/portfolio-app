@@ -19,6 +19,29 @@ const AboutMeListItemText = styled(ListItemText)(({ theme }) => ({
     color: theme.palette.secondary.main
 }));
 
+const AboutMeListItem = styled(ListItem)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 'clamp(0.9rem, 1.5vw, 1.5rem)',
+    '& svg': {
+        fontSize: 'inherit',
+    },
+    '& .MuiListItemText-primary': {
+        fontSize: 'inherit',
+    },
+}));
+
+const ListStyled = styled(List)(({ theme }) => ({
+    marginTop: '48px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '3px solid #0000',
+    borderRadius: '12px',
+    background: theme.custom.gradients.aboutMeList,
+    animation: '8s rotate linear infinite',
+}));
+
 const AboutMe = ({ t }) => {
     return (
         <Grid container>
@@ -26,32 +49,32 @@ const AboutMe = ({ t }) => {
                 <Item>
                     <Box sx={{ width: '100%', textAlign: 'center' }}>
                         <Typography variant="h1" align="center">About Me</Typography>
-                        <List sx={{ display: 'inline-block', mt: 3, padding: '12px' }} className="about-me-list">
-                            <ListItem>
+                        <ListStyled sx={{ display: 'inline-block', mt: 3, padding: '12px' }}>
+                            <AboutMeListItem>
                                 <AboutMeListIcon>
                                     <LocationOn />
                                 </AboutMeListIcon>
                                 <AboutMeListItemText>
                                     {t('location')}
                                 </AboutMeListItemText>
-                            </ListItem>
-                            <ListItem>
+                            </AboutMeListItem>
+                            <AboutMeListItem>
                                 <AboutMeListIcon>
                                     <School />
                                 </AboutMeListIcon>
                                 <AboutMeListItemText>
                                     {t('school')}
                                 </AboutMeListItemText>
-                            </ListItem>
-                            <ListItem>
+                            </AboutMeListItem>
+                            <AboutMeListItem>
                                 <AboutMeListIcon>
                                     <Timer />
                                 </AboutMeListIcon>
                                 <AboutMeListItemText>
                                     {t('yearsOfExperience', { count: getYearsOfExperience() })}
                                 </AboutMeListItemText>
-                            </ListItem>
-                        </List>
+                            </AboutMeListItem>
+                        </ListStyled>
                     </Box>
                 </Item>
             </Grid>
