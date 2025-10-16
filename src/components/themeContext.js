@@ -1,20 +1,29 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { zeroSevenLightTheme, zeroSevenDarkTheme } from '../theme/zeroSevenTheme';
 import { ThemeProvider } from '@mui/material/styles';
 
 const ThemeContext = createContext();
 
 export const ThemeProviderWithToggle = ({ children }) => {
-    const [mode, setMode] = useState('light');
+    const [themeMode, setThemeMode] = useState('light');
+
+    useEffect(() => {
+        const savedMode = localStorage.getItem('themeMode');
+        if (savedMode) {
+            setThemeMode(savedMode);
+        }
+    }, []);
 
     const toggleTheme = () => {
-        setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+        const newThemeMode = themeMode === 'light' ? 'dark' : 'light';
+        setThemeMode(newThemeMode);
+        localStorage.setItem('themeMode', newThemeMode);
     };
 
-    const theme = mode === 'light' ? zeroSevenLightTheme : zeroSevenDarkTheme;
+    const theme = themeMode === 'light' ? zeroSevenLightTheme : zeroSevenDarkTheme;
 
     return (
-        <ThemeContext.Provider value={{ mode, toggleTheme }}>
+        <ThemeContext.Provider value={{ mode: themeMode, toggleTheme }}>
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </ThemeContext.Provider>
     );

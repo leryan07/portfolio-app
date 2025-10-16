@@ -12,7 +12,6 @@ const SectionCommon = styled('section')(({ theme, variant }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   margin: 0,
   padding: 0,
   ...(variant === 'intro' && {
@@ -21,6 +20,7 @@ const SectionCommon = styled('section')(({ theme, variant }) => ({
     backgroundImage: theme.custom.gradients.sectionIntro,
   }),
   ...(variant === 'aboutMe' && {
+    justifyContent: 'center',
     backgroundImage: theme.custom.gradients.sectionAboutMe,
   })
 }));
@@ -29,13 +29,7 @@ function App() {
   const { t } = useTranslation();
 
   return (
-    <Grid
-      container
-      sx={{
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <Grid container>
       <Grid size={{ xs: 12 }}>
         <Item>
           <NavigationBar t={t} />

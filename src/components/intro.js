@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { default as Grid, default as Item } from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import '../styles/intro.css';
+import SportsScores from "./sportsScores";
 
 const introTypographyStyle = (theme, color) => ({
     fontSize: { xs: '3rem', md: '6vw' },
@@ -25,30 +26,37 @@ const Intro = ({ t }) => {
     }, []);
 
     return (
-        <Grid container>
-            <Grid size={{ xs: 6 }} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Grid container sx={{ marginTop: 3 }}>
+            <Grid size={{ xs: 12 }}>
                 <Item>
-                    <Typography
-                        variant="h1"
-                        className={showFirst ? 'slide-in-left' : 'slide-init-left'}
-                        sx={(theme) => introTypographyStyle(theme)}
-                    >
-                        {t('name').split(' ')[0]}
-                    </Typography>
+                    <SportsScores />
                 </Item>
             </Grid>
-            <Grid size={{ xs: 6 }} />
-            <Grid size={{ xs: 6 }} />
-            <Grid size={{ xs: 6 }}>
-                <Item>
-                    <Typography
-                        variant="h1"
-                        className={showSecond ? 'slide-in-right' : 'slide-init-right'}
-                        sx={(theme) => introTypographyStyle(theme, theme.palette.secondary.main)}
-                    >
-                        {t('name').split(' ')[1]}
-                    </Typography>
-                </Item>
+            <Grid container sx={{ alignContent: 'center', display: 'flex', height: 'calc(100vh - 70px)', width: '100%' }}>
+                <Grid size={{ xs: 6 }} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Item>
+                        <Typography
+                            variant="h1"
+                            className={showFirst ? 'slide-in-left' : 'slide-init-left'}
+                            sx={(theme) => introTypographyStyle(theme)}
+                        >
+                            {t('name').split(' ')[0]}
+                        </Typography>
+                    </Item>
+                </Grid>
+                <Grid size={{ xs: 6 }} />
+                <Grid size={{ xs: 6 }} />
+                <Grid size={{ xs: 6 }}>
+                    <Item>
+                        <Typography
+                            variant="h1"
+                            className={showSecond ? 'slide-in-right' : 'slide-init-right'}
+                            sx={(theme) => introTypographyStyle(theme, theme.palette.secondary.main)}
+                        >
+                            {t('name').split(' ')[1]}
+                        </Typography>
+                    </Item>
+                </Grid>
             </Grid>
         </Grid>
     )
