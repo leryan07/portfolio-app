@@ -7,13 +7,6 @@ const ThemeContext = createContext();
 export const ThemeProviderWithToggle = ({ children }) => {
     const [themeMode, setThemeMode] = useState('light');
 
-    useEffect(() => {
-        const savedMode = localStorage.getItem('themeMode');
-        if (savedMode) {
-            setThemeMode(savedMode);
-        }
-    }, []);
-
     const toggleTheme = () => {
         const newThemeMode = themeMode === 'light' ? 'dark' : 'light';
         setThemeMode(newThemeMode);
@@ -21,6 +14,13 @@ export const ThemeProviderWithToggle = ({ children }) => {
     };
 
     const theme = themeMode === 'light' ? zeroSevenLightTheme : zeroSevenDarkTheme;
+
+    useEffect(() => {
+        const savedMode = localStorage.getItem('themeMode');
+        if (savedMode) {
+            setThemeMode(savedMode);
+        }
+    }, []);
 
     return (
         <ThemeContext.Provider value={{ mode: themeMode, toggleTheme }}>
