@@ -1,16 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
-import styled from '@emotion/styled';
+import { Box, Stack } from '@mui/material';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
-
-const BoxStyled = styled(Box)(({ theme }) => ({
-    padding: '8px',
-    border: '3px solid #0000',
-    borderRadius: '12px',
-    background: theme.custom.gradients.aboutMeList,
-    animation: '8s rotate linear infinite',
-}));
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { fetchNflScores } from '../api/espnAPI';
+import { MatchupCard } from './matchupCard';
 
 const ScrollArrow = ({ position, color, onClick }) => {
     const Icon = position === 'left' ? ArrowBack : ArrowForward;
@@ -43,7 +38,7 @@ function SportsScores() {
     const scrollRef = useRef(null);
     const [atStart, setAtStart] = useState(true);
     const [atEnd, setAtEnd] = useState(false);
-    const scrollAmount = 500;
+    const scrollAmount = 700;
 
     const checkScroll = () => {
         const el = scrollRef.current;
@@ -63,72 +58,55 @@ function SportsScores() {
     }, [nflScores]);
 
     useEffect(() => {
-        fetch('http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                const competitions = data.events
-                    .flatMap(event => event.competitions || []);
-
-                const matchups = competitions.map(comp => ({
-                    home: comp.competitors?.find(team => team.homeAway === 'home')?.team?.name,
-                    away: comp.competitors?.find(team => team.homeAway === 'away')?.team?.name,
-                    homeScore: comp.competitors?.find(team => team.homeAway === 'home')?.score,
-                    awayScore: comp.competitors?.find(team => team.homeAway === 'away')?.score
-                }));
-
-                console.log(matchups);
-                setNflScores(matchups);
-            });
+        fetchNflScores().then(scores => setNflScores(scores));
     }, []);
 
     return (
-        <Box sx={{ position: 'relative', width: '80%', mx: 'auto' }}>
-            <Box
-                ref={scrollRef}
-                sx={{
-                    overflowX: 'auto',
-                    whiteSpace: 'nowrap',
-                    '&::-webkit-scrollbar': {
-                        display: 'none'
-                    }
-                }}>
-                <Stack direction="row" spacing={2} sx={{ paddingLeft: 2, paddingRight: 2 }}>
-                    {nflScores.map((matchup, index) => (
-                        <BoxStyled key={index} width={300}>
-                            <Box display="flex" justifyContent="space-between">
-                                <Typography variant="body1" sx={{ minWidth: 150 }}>{matchup.away}</Typography>
-                                <Typography variant="body1">{matchup.awayScore}</Typography>
-                            </Box>
-                            <Box display="flex" justifyContent="space-between">
-                                <Typography variant="body1" sx={{ minWidth: 150 }}>{matchup.home}</Typography>
-                                <Typography variant="body1">{matchup.homeScore}</Typography>
-                            </Box>
-                        </BoxStyled>
-                    ))}
-                </Stack>
+        <Stack sx={{ position: 'relative', mx: 'auto' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <ToggleButtonGroup exclusive>
+                    <ToggleButton value='nfl' selected>NFL</ToggleButton>
+                    <ToggleButton value='nba'>NBA</ToggleButton>
+                </ToggleButtonGroup>
             </Box>
+            <Box sx={{ position: 'relative', mt: 2 }}>
+                <Box
+                    ref={scrollRef}
+                    sx={{
+                        overflowX: 'auto',
+                        whiteSpace: 'nowrap',
+                        '&::-webkit-scrollbar': {
+                            display: 'none'
+                        },
+                    }}>
+                    <Stack direction="row" spacing={2}>
+                        {nflScores.map((matchup, index) => (
+                            <MatchupCard key={index} matchup={matchup} />
+                        ))}
+                    </Stack>
+                </Box>
 
-            {!atStart && (
-                <ScrollArrow
-                    position="left"
-                    color="primary"
-                    onClick={() =>
-                        scrollRef.current?.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
-                    }
-                />
-            )}
+                {!atStart && (
+                    <ScrollArrow
+                        position="left"
+                        color="primary"
+                        onClick={() =>
+                            scrollRef.current?.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+                        }
+                    />
+                )}
 
-            {!atEnd && (
-                <ScrollArrow
-                    position="right"
-                    color="secondary"
-                    onClick={() =>
-                        scrollRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' })
-                    }
-                />
-            )}
-        </Box>
+                {!atEnd && (
+                    <ScrollArrow
+                        position="right"
+                        color="secondary"
+                        onClick={() =>
+                            scrollRef.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+                        }
+                    />
+                )}
+            </Box>
+        </Stack>
     );
 }
 

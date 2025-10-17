@@ -26,14 +26,14 @@ const Intro = ({ t }) => {
     }, []);
 
     return (
-        <Grid container sx={{ marginTop: 3 }}>
+        <Grid container direction='column' minHeight={'calc(100vh - 64px)'} sx={{ paddingTop: 2 }}>
             <Grid size={{ xs: 12 }}>
-                <Item>
+                <Item sx={{ width: '80%', margin: '0 auto' }}>
                     <SportsScores />
                 </Item>
             </Grid>
-            <Grid container sx={{ alignContent: 'center', display: 'flex', height: 'calc(100vh - 70px)', width: '100%' }}>
-                <Grid size={{ xs: 6 }} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Grid container sx={{ flexGrow: 1 }}>
+                <Grid size={{ xs: 6 }} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
                     <Item>
                         <Typography
                             variant="h1"
