@@ -70,6 +70,7 @@ const NavigationBar = ({ t }) => {
 
         return () => clearTimeout(timeout);
     }, [mode]);
+    
     return (
         <React.Fragment>
             <HideOnScroll>

@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
-import { getYearsOfExperience } from "../utils/experience";
+import { getYearsOfExperience } from "../utils/experienceCalcUtil";
 import '../styles/aboutMe.css';
 
 const AboutMeListIcon = styled(ListItemIcon)(({ theme }) => ({
@@ -19,7 +19,7 @@ const AboutMeListItemText = styled(ListItemText)(({ theme }) => ({
     color: theme.palette.secondary.main
 }));
 
-const AboutMeListItem = styled(ListItem)(({ theme }) => ({
+const AboutMeListItem = styled(ListItem)(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
