@@ -4,14 +4,7 @@ export const fetchNflScores = async () => {
     );
     const data = await response.json();
 
-    const competitions = data.events.flatMap(event => event.competitions || []);
-
-    return competitions.map(comp => ({
-        home: comp.competitors?.find(team => team.homeAway === 'home')?.team?.name,
-        away: comp.competitors?.find(team => team.homeAway === 'away')?.team?.name,
-        homeScore: comp.competitors?.find(team => team.homeAway === 'home')?.score,
-        awayScore: comp.competitors?.find(team => team.homeAway === 'away')?.score,
-    }));
+    return extractMatchDetails(data, 'nfl');
 };
 
 export const fetchNbaScores = async () => {
@@ -20,12 +13,30 @@ export const fetchNbaScores = async () => {
     );
     const data = await response.json();
 
-    const competitions = data.events.flatMap(event => event.competitions || []);
-
-    return competitions.map(comp => ({
-        home: comp.competitors?.find(team => team.homeAway === 'home')?.team?.name,
-        away: comp.competitors?.find(team => team.homeAway === 'away')?.team?.name,
-        homeScore: comp.competitors?.find(team => team.homeAway === 'home')?.score,
-        awayScore: comp.competitors?.find(team => team.homeAway === 'away')?.score,
-    }));
+    return extractMatchDetails(data, 'nba');
 };
+
+function extractMatchDetails(scoreboardData, league) {
+    return scoreboardData.events.flatMap(event =>
+        (event.competitions || []).map(comp => {
+            const homeTeam = comp.competitors?.find(team => team.homeAway === 'home');
+            const awayTeam = comp.competitors?.find(team => team.homeAway === 'away');
+
+            const homeTeamOverallRecord = homeTeam.records?.find(record => record.type === 'total');
+            const awayTeamOverallRecord = awayTeam.records?.find(record => record.type === 'total');
+
+            return {
+                league,
+                date: event.date,
+                home: homeTeam?.team?.name,
+                away: awayTeam?.team?.name,
+                homeScore: homeTeam?.score,
+                awayScore: awayTeam?.score,
+                homeTeamOverallRecord: homeTeamOverallRecord.summary,
+                awayTeamOverallRecord: awayTeamOverallRecord.summary,
+                status: event.status,
+                weekNumber: league === 'nfl' ? scoreboardData.week.number : 'N/A'
+            };
+        })
+    );
+}

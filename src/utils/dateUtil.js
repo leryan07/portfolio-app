@@ -6,3 +6,12 @@ export const getFormattedDate = () => {
 
     return `${month}/${day}/${year}`;
 };
+
+export function convertToLocalTime(utcString) {
+    const utcDate = new Date(utcString);
+    return utcDate.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    })
+};
