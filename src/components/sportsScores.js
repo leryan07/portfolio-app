@@ -10,10 +10,12 @@ import { getFormattedDate } from '../utils/dateUtil';
 
 function SportsScores() {
     const [scores, setScores] = useState([]);
-    const [sportLeagueToggle, setSportLeagueToggle] = useState('nfl');
+    const [sportLeagueToggle, setSportLeagueToggle] = useState('myTeams');
 
     const handleSportLeagueChange = (event, newLeague) => {
-        setSportLeagueToggle(newLeague);
+        if (newLeague !== null) {
+            setSportLeagueToggle(newLeague);
+        }
     };
 
     const scrollRef = useRef(null);
@@ -22,8 +24,44 @@ function SportsScores() {
 
     const isOverflowing = useIsOverflowing(scrollRef, [scores]);
 
+    const isInitialLoad = useRef(true);
+
+    const loadMyScores = async () => {
+        try {
+            const nflScores = await fetchNflScores();
+            const nbaScores = await fetchNbaScores();
+
+            const myScores = [];
+
+            nflScores.forEach(score => {
+                if (score.home?.toLowerCase() === "colts" || score.away?.toLowerCase() === "colts") {
+                    myScores.push(score);
+                }
+            });
+
+            nbaScores.forEach(score => {
+                if (score.home?.toLowerCase() === "pacers" || score.away?.toLowerCase() === "pacers") {
+                    myScores.push(score);
+                }
+            });
+
+            setScores(myScores);
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
     useEffect(() => {
+        if (isInitialLoad.current) {
+            isInitialLoad.current = false;
+            loadMyScores();
+            return;
+        }
+
         switch (sportLeagueToggle) {
+            case 'myTeams':
+                loadMyScores();
+                break;
             case 'nfl':
                 fetchNflScores().then(scores => setScores(scores));
                 break;
@@ -44,6 +82,18 @@ function SportsScores() {
                     exclusive
                     onChange={handleSportLeagueChange}>
                     <ToggleButton value='nfl'>NFL</ToggleButton>
+                    <ToggleButton value='myTeams'
+                        sx={{
+                            '&.Mui-selected': {
+                                backgroundColor: 'rgba(255, 165, 0, 0.08)',
+                                color: '#5D3FD3'
+                            },
+                            '&.Mui-selected:hover': {
+                                backgroundColor: 'rgba(255, 165, 0, 0.12)'
+                            }
+                        }}>
+                        My Teams
+                    </ToggleButton>
                     <ToggleButton value='nba'>NBA</ToggleButton>
                 </ToggleButtonGroup>
             </Box>
