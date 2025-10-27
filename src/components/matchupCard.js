@@ -18,7 +18,7 @@ export const MatchupCard = ({ matchup }) => {
     return (
         <BoxStyled width="fit-content">
             <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" sx={{ minWidth: 150 }}>
+                <Typography variant="body1" sx={{ minWidth: 200 }}>
                     {matchup.league === 'nfl' ?
                         `Week ${matchup.weekNumber}` : ''
                     }
