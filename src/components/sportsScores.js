@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { fetchNflScores, fetchNbaScores } from '../api/espnAPI';
@@ -51,6 +51,22 @@ function SportsScores() {
         }
     };
 
+    const loadScores = () => {
+        switch (sportLeagueToggle) {
+            case 'myTeams':
+                loadMyScores();
+                break;
+            case 'nfl':
+                fetchNflScores().then(setScores);
+                break;
+            case 'nba':
+                fetchNbaScores().then(setScores);
+                break;
+            default:
+                break;
+        }
+    };
+
     useEffect(() => {
         if (isInitialLoad.current) {
             isInitialLoad.current = false;
@@ -58,20 +74,18 @@ function SportsScores() {
             return;
         }
 
-        switch (sportLeagueToggle) {
-            case 'myTeams':
-                loadMyScores();
-                break;
-            case 'nfl':
-                fetchNflScores().then(scores => setScores(scores));
-                break;
-            case 'nba':
-                fetchNbaScores().then(scores => setScores(scores));
-                break;
-            default:
-                break;
-        }
+        loadScores(false);
     }, [sportLeagueToggle]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            loadScores(true);
+        }, 15000);
+
+        return () => clearInterval(interval);
+    }, [sportLeagueToggle]);
+
+
 
     return (
         <Stack sx={{ position: 'relative', mx: 'auto' }}>

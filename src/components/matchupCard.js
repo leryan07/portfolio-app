@@ -14,7 +14,8 @@ const BoxStyled = styled(Box)(({ theme }) => ({
 
 export const MatchupCard = ({ matchup }) => {
     const { t } = useTranslation();
-    const matchupState = matchup.status.type.state;
+    const matchupType = matchup.status.type;
+    const matchupState = matchupType.state;
     const homeTeam = matchup.home;
     const awayTeam = matchup.away;
     const homeScore = Number(matchup.homeScore);
@@ -31,31 +32,44 @@ export const MatchupCard = ({ matchup }) => {
         null
     }
 
+    let status;
+    switch (matchupState) {
+        case 'post':
+            status = t('final');
+            break;
+        case 'in':
+            status = matchupType.shortDetail;
+            break;
+        default:
+            status = convertToLocalTime(matchup.date);
+            break;
+    }
+
     return (
-        <BoxStyled width="fit-content">
+        <BoxStyled sx={{ minWidth: 300 }}>
             <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" sx={{ minWidth: 200 }}>
+                <Typography variant="body1">
                     {matchup.league === 'nfl' ?
                         `Week ${matchup.weekNumber}` : ''
                     }
                 </Typography>
                 <Box display="flex" alignItems="center" justifyContent="flex-end">
-                    <Typography variant="body1" sx={{ textAlign: 'right', flexGrow: 1 }}>
-                        {matchupState === 'post' ? t('final') :
-                            convertToLocalTime(matchup.date)
-                        }
+                    <Typography variant="body1">
+                        {status}
                     </Typography>
-                    {matchupState === 'post' && (
-                        <Box sx={{ width: 24, height: 24, display: 'flex' }} />
-                    )}
+                    {
+                        matchupState === 'post' && (
+                            <Box sx={{ width: 24, height: 24, display: 'flex' }} />
+                        )
+                    }
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" sx={{ mt: 1 }}>
-                <Typography variant="body1" sx={{ minWidth: 200 }}>
+            <Box display="flex" justifyContent="space-between" sx={{ mt: 2 }}>
+                <Typography variant="body1">
                     {matchup.away}
                 </Typography>
                 <Box display="flex" alignItems="center" justifyContent="flex-end">
-                    <Typography variant="body1" sx={{ textAlign: 'right', flexGrow: 1 }}>
+                    <Typography variant="body1">
                         {matchupState === 'pre' ? matchup.awayTeamOverallRecord : matchup.awayScore}
                     </Typography>
                     {
@@ -68,11 +82,11 @@ export const MatchupCard = ({ matchup }) => {
                 </Box>
             </Box>
             <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" sx={{ minWidth: 200 }}>
+                <Typography variant="body1">
                     {matchup.home}
                 </Typography>
                 <Box display="flex" alignItems="center" justifyContent="flex-end">
-                    <Typography variant="body1" sx={{ textAlign: 'right', flexGrow: 1 }}>
+                    <Typography variant="body1">
                         {matchupState === 'pre' ? matchup.homeTeamOverallRecord : matchup.homeScore}
                     </Typography>
                     {
