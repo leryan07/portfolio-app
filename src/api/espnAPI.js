@@ -1,6 +1,6 @@
 export const fetchNflScores = async () => {
     const response = await fetch(
-        'http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
+        'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
     );
     const data = await response.json();
 
@@ -9,7 +9,7 @@ export const fetchNflScores = async () => {
 
 export const fetchNbaScores = async () => {
     const response = await fetch(
-        'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard'
+        'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard'
     );
     const data = await response.json();
 
@@ -32,8 +32,8 @@ function extractMatchDetails(scoreboardData, league) {
                 away: awayTeam?.team?.name,
                 homeScore: homeTeam?.score,
                 awayScore: awayTeam?.score,
-                homeTeamOverallRecord: homeTeamOverallRecord.summary,
-                awayTeamOverallRecord: awayTeamOverallRecord.summary,
+                homeTeamOverallRecord: homeTeamOverallRecord?.summary,
+                awayTeamOverallRecord: awayTeamOverallRecord?.summary,
                 status: event.status,
                 weekNumber: league === 'nfl' ? scoreboardData.week.number : 'N/A'
             };
