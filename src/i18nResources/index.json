@@ -1,10 +1,13 @@
 {
     "en": {
         "translation": {
+            "siteName": "Area Zero Seven",
+            "siteNameDark": "Area Zero Dark Seven",
             "name": "Ryan Le",
-            "jobTitle": "Software Developer",
             "location": "Dallas, TX",
-            "school": "Florida Atlantic University"
+            "school": "Florida Atlantic University",
+            "yearsOfExperience": "{{count}} years of experience",
+            "final": "Final"
         }
     }
 }

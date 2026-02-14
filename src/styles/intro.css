@@ -1,0 +1,23 @@
+.slide-init-left {
+    opacity: 0;
+    transform: translateX(-100vw);
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide-in-left {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide-init-right {
+    opacity: 0;
+    transform: translateX(100vw);
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide-in-right {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
