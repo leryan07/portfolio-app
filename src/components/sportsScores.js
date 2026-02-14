@@ -114,7 +114,7 @@ function SportsScores() {
             <Typography variant="h5" sx={{ textAlign: 'center', mt: 2 }}>
                 {getFormattedDate()}
             </Typography>
-            <Box sx={{ position: 'relative', mt: 2 }}>
+            <Box sx={{ position: 'relative', mt: 2, minHeight: '110px' }}>
                 <Box
                     ref={scrollRef}
                     sx={{
