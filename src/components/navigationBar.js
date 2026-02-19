@@ -12,7 +12,7 @@ import React from 'react';
 import ThemeSwitch from './themeSwitch';
 import { useThemeToggle } from './themeContext';
 import { keyframes } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
     color: theme.palette.secondary.main,
@@ -55,12 +55,18 @@ const NavigationBar = ({ t }) => {
     const { mode } = useThemeToggle();
     const [siteName, setSiteName] = useState(t('siteName'));
     const [animatingOut, setAnimatingOut] = useState(false);
+    const hasMounted = useRef(false);
 
     const siteNameAnimation = animatingOut
         ? `${fallOut} 0.4s ease forwards`
         : `${fallIn} 0.4s ease forwards`;
 
     useEffect(() => {
+        if (!hasMounted.current) {
+            hasMounted.current = true;
+            return;
+        }
+
         setAnimatingOut(true);
 
         const timeout = setTimeout(() => {
@@ -70,7 +76,7 @@ const NavigationBar = ({ t }) => {
 
         return () => clearTimeout(timeout);
     }, [mode]);
-    
+
     return (
         <React.Fragment>
             <HideOnScroll>
